@@ -30,7 +30,7 @@
             cursor: crosshair; 
             touch-action: none;
             width: 100% !important;
-            height: 400px !important;   /* 調整高度參考你的示例 */
+            height: 340px !important;
         }
 
         .footer-warning {
@@ -46,19 +46,32 @@
             color: #854d0e;
             z-index: 50;
         }
+
+        /* 白底黑框輸入框樣式 */
+        .plain-input {
+            width: 100%;
+            border: 1px solid #000;
+            border-radius: 0;
+            padding: 8px;
+            background: white;
+            color: black;
+            font-size: 1rem;
+            outline: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
 
-    <!-- 前頁 -->
+    <!-- 前頁（加入密碼保護） -->
     <div id="landing-page" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 to-indigo-800">
         <div class="max-w-md w-full mx-6 bg-white rounded-3xl shadow-2xl p-10 text-center">
-            <div class="text-2xl font-bold text-bold mb-6">導師文件填寫系統</div>
+            <div class="text-2xl font-bold mb-6">導師文件填寫系統</div>
             <div class="space-y-6 text-left text-base">
                 <div class="bg-amber-50 border border-amber-200 p-5 rounded-2xl">⚠️僅供導師使用，文件內容只限內部傳閱，請勿轉發及外傳相關內容</div>
                 <div class="bg-red-50 border border-red-200 p-5 rounded-2xl">此文件簽署後需於 <u><strong>31/3 前</strong></u> 發送至相關工作員</div>
             </div>
-            <button onclick="enterSystem()" class="mt-10 w-full bg-blue-600 hover:bg-blue-700 text-white text-2xl font-semibold py-6 rounded-3xl">進入系統</button>
+            <input type="password" id="password-input" class="plain-input mt-10 mb-4" />
+            <button onclick="checkPassword()" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-2xl font-semibold py-6 rounded-3xl">進入系統</button>
         </div>
     </div>
 
@@ -101,11 +114,10 @@
             <div id="form-container" class="max-w-[820px] mx-auto bg-white rounded-3xl shadow-xl p-8">
                 <div class="text-center mb-8">
                     <h3 class="text-2xl font-bold">全新「守護兒童及青少年政策」及經修訂之《僱員行為守則》</h3>
-                    <p class="text-xl font-bold">New Child & Youth Safeguarding Policy & Updated Code of Conduct</p>
                 </div>
                 <div class="space-y-6 text-base">
-                    <p>以上兩項政策已發布，並將於2026年1月1日正式生效。The above mentioned 2 policies are now available and will officially take effect on 1 January 2026. </p>
-                    <p>請各同工仔細閱讀及於 <u><strong>2026年3月31日</strong></u>或前回覆此表格。Please read these two policies and confirm your acknowledgment by filling in this form by <u><strong>31 Marth 2026</strong></u>.</p>
+                    <p>以上兩項政策已發布，並將於2026年1月1日正式生效。</p>
+                    <p>The above mentioned 2 policies are now available and will officially take effect on 1 January 2026. 請各同工仔細閱讀及於2026年1月15日或前回覆此表格。Please read these two policies and confirm your acknowledgment by filling in this form by 15 January 2026.</p>
                     
                     <div class="flex gap-4 items-start bg-blue-50 border border-blue-200 p-6 rounded-2xl">
                         <span class="text-4xl text-green-600">☑</span>
@@ -117,11 +129,11 @@
 
                 <div class="mt-10 space-y-8">
                     <div>
-                        <p class="font-medium mb-2">(1) 英文姓名：</p>
+                        <p class="font-medium mb-2">(2) 英文姓名：</p>
                         <input id="english-name" type="text" class="plain-input">
                     </div>
                     <div>
-                        <p class="font-medium mb-2">(2) 導師簽署：</p>
+                        <p class="font-medium mb-2">(1) 導師簽署：</p>
                         <canvas id="signature-canvas" width="800" height="340"></canvas>
                         <div class="flex gap-4 mt-4">
                             <button onclick="clearSignature()" class="text-xs px-6 py-2 bg-gray-100 rounded-2xl">清除簽名</button>
@@ -135,17 +147,36 @@
                 </div>
             </div>
 
+            <div class="mt-10 max-w-[820px] mx-auto">
+                <button onclick="generateAndSend()" 
+                        class="w-full py-6 bg-green-600 hover:bg-green-700 text-white text-xl font-semibold rounded-3xl">
+                    完成✅
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 底部警示 -->
     <div class="footer-warning">
-        ⚠️文件內容只限內部傳閱，請勿轉發及外傳相關內容
+        ⚠️ 僅供導師使用，文件內容只限內部傳閱
     </div>
 
     <script>
-        function enterSystem() {
-            document.getElementById('landing-page').classList.add('hidden');
-            document.getElementById('main-app').classList.remove('hidden');
-            goToStep(1);
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            if (input === 'tutorsign') {
+                document.getElementById('landing-page').classList.add('hidden');
+                document.getElementById('main-app').classList.remove('hidden');
+                goToStep(1);
+            } else {
+                alert('密碼錯誤！');
+            }
         }
+
+        function enterSystem() {
+            // 前頁無按鈕邏輯，僅用於密碼檢查
+        }
+
         function goToStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.add('hidden'));
             document.getElementById(`step-${n}`).classList.remove('hidden');
