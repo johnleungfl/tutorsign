@@ -44,25 +44,19 @@
             color: #854d0e;
             z-index: 50;
         }
-        .plain-input {
-            background: white;
-            border: 1px solid black;
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- 前頁 -->
     <div id="landing-page" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 to-indigo-800">
         <div class="max-w-md w-full mx-6 bg-white rounded-3xl shadow-2xl p-10 text-center">
-            <div class="text-2xl font-bold text-bold mb-6">導師文件填寫系統</div>
+            <div class="text-2xl font-bold mb-6">導師文件填寫系統</div>
             <div class="space-y-6 text-left text-base">
                 <div class="bg-amber-50 border border-amber-200 p-5 rounded-2xl">⚠️僅供導師使用，文件內容只限內部傳閱，請勿轉發及外傳相關內容</div>
                 <div class="bg-red-50 border border-red-200 p-5 rounded-2xl">此文件簽署後需於 <u><strong>31/3 前</strong></u> 發送至相關工作員</div>
             </div>
-            <input type="password" id="password-input" class="plain-input mt-6 mb-4">
+            <p class="text-left font-medium mt-6">輸入密碼</p>
+            <input type="password" id="password-input" class="w-full bg-white border border-black p-3 mb-4">
             <button onclick="checkPassword()" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-2xl font-semibold py-6 rounded-3xl">進入系統</button>
         </div>
     </div>
@@ -116,15 +110,15 @@
                 </div>
                 <div class="mt-10 space-y-8">
                     <div>
-                        <p class="font-medium mb-2">(2) 英文姓名：</p>
-                        <input id="english-name" type="text" class="w-full border border-gray-300 rounded-2xl px-5 py-4 text-lg" placeholder="CHAN TAI MAN">
-                    </div>
-                    <div>
                         <p class="font-medium mb-2">(1) 導師簽署：</p>
                         <canvas id="signature-canvas" width="800" height="340"></canvas>
                         <div class="flex gap-4 mt-4">
                             <button onclick="clearSignature()" class="text-xs px-6 py-2 bg-gray-100 rounded-2xl">清除簽名</button>
                         </div>
+                    </div>
+                    <div>
+                        <p class="font-medium mb-2">(2) 英文姓名：</p>
+                        <input id="english-name" type="text" class="w-full border border-gray-300 rounded-2xl px-5 py-4 text-lg" placeholder="CHAN TAI MAN">
                     </div>
                     <div>
                         <p class="font-medium mb-2">(3) 簽署日期：</p>
@@ -256,6 +250,5 @@
         };
     </script>
 </body>
-</html> 
-
-請根據這個為基礎。在前頁加入密碼保護，密碼為tutorsign，在密碼輸入框，請不要有範例灰字。然後我希望在最後的簽署確認表中位置交換，改為(1)導師簽署和(2)英文姓名。
+</html>
+ 
