@@ -117,16 +117,17 @@
 
                 <div class="mt-10 space-y-8">
                     <div>
-                        <p class="font-medium mb-2">(1) 導師簽署：</p>
+                        <p class="font-medium mb-2">(1) 英文姓名：</p>
+                        <input id="english-name" type="text" class="w-full border border-gray-300 rounded-2xl px-5 py-4 text-lg" placeholder="CHAN TAI MAN">
+                    </div>
+                    <div>
+                        <p class="font-medium mb-2">(2) 導師簽署：</p>
                         <canvas id="signature-canvas" width="800" height="340"></canvas>
                         <div class="flex gap-4 mt-4">
                             <button onclick="clearSignature()" class="text-xs px-6 py-2 bg-gray-100 rounded-2xl">清除簽名</button>
                         </div>
                     </div>
-                    <div>
-                        <p class="font-medium mb-2">(2) 英文姓名：</p>
-                        <input id="english-name" type="text" class="w-full border border-gray-300 rounded-2xl px-5 py-4 text-lg" placeholder="CHAN TAI MAN">
-                    </div>
+
                     <div>
                         <p class="font-medium mb-2">(3) 簽署日期：</p>
                         <input id="sign-date" type="text" readonly class="w-full border border-gray-300 rounded-2xl px-5 py-4 text-lg text-left font-medium">
